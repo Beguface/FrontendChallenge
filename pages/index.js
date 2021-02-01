@@ -1,10 +1,11 @@
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import { initializeApollo } from "../libs/apolloClient";
+import { Heading } from "@chakra-ui/react";
 
 export default function Home() {
   return (
     <>
-      <h1>Hola mundo</h1>
+      <Heading>Hola mundo</Heading>
     </>
   );
 }
