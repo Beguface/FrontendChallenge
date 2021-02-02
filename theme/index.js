@@ -33,23 +33,6 @@ const overrides = {
     "5xl": "48px",
     "6xl": "64px",
   },
-
-  fontWeights: {
-    normal: 400,
-    medium: 500,
-    bold: 700,
-  },
-
-  lineHeights: {
-    body: 1.5,
-    heading: 1.2,
-  },
-
-  colors: {
-    primary: "#0D79C6",
-    muted: "#f6f6f6",
-    transparent: "transparent",
-  },
 };
 
 export default extendTheme(overrides);
