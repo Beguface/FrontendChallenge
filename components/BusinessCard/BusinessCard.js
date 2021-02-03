@@ -13,14 +13,19 @@ const BusinessCard = ({
   rating,
 }) => {
   return (
-    <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
+    <Box
+      maxW={["sm", "lg", "sm", "xs"]}
+      borderWidth="1px"
+      borderRadius="lg"
+      overflow="hidden"
+    >
       <Box height="180px">
         <Image
           objectFit="cover"
           boxSize="100%"
           src={imageUrl[0]}
           alt={imageAlt}
-          fallbackSrc="https://via.placeholder.com/150"
+          fallbackSrc="https://via.placeholder.com/180"
         />
       </Box>
 

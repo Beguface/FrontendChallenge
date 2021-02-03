@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider theme={theme}>
       <ApolloProvider client={apolloClient}>
-        <AppLayout>
+        <AppLayout {...pageProps}>
           <Component {...pageProps} />
         </AppLayout>
       </ApolloProvider>

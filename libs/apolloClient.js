@@ -8,7 +8,6 @@ import { isEqualType } from "graphql";
 let apolloClient;
 
 const authLink = setContext(async (_, { headers }) => {
-  const key = process.env.API_KEY;
   return {
     headers: {
       ...headers,
@@ -25,7 +24,7 @@ const httpLink = new HttpLink({
 function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === "undefined",
-    link: httpLink,
+    link: authLink.concat(httpLink),
     cache: new InMemoryCache(),
   });
 }
