@@ -1,16 +1,14 @@
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import { initializeApollo } from "../libs/apolloClient";
-import { Box, Flex, Input } from "@chakra-ui/react";
-import BusinessCard from "@components/BusinessCard/BusinessCard";
+import { Box, Flex } from "@chakra-ui/react";
+import CarruselContainer from "@components/Containers/CarruselContainer";
 
 export default function Home() {
   return (
     <>
-      <Flex justify="center" align="center" height="100vh" padding="5%">
-        <Box>
-          <BusinessCard />
-        </Box>
-      </Flex>
+      <Box>
+        <CarruselContainer />
+      </Box>
     </>
   );
 }

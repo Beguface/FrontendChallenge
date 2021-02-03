@@ -1,30 +1,26 @@
 import React from "react";
 import Image from "next/image";
-import {
-  Flex,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  InputRightElement,
-} from "@chakra-ui/react";
-import { SearchIcon } from "@chakra-ui/icons";
+import { Box, Flex } from "@chakra-ui/react";
+import SearchBar from "@components/SearchBar/SearchBar";
 
 const Navbar = () => {
   return (
     <Flex
-      justify={["space-around", "flex-start"]}
+      justify={["space-around", "center"]}
       align="center"
       flexWrap="wrap"
       width="100%"
       px="4"
       py="3"
       borderBottom="1px #E2E8F0 solid"
+      pos="fixed"
+      top="0"
+      bg="#ffffff"
     >
-      <Image src="/logo-original.svg" alt="logo" width={122} height={34} />
-      <InputGroup mt={["2"]} ml={["0", "6"]} maxW={["90%", "40%"]}>
-        <InputLeftElement pointerEvents="none" children={<SearchIcon />} />
-        <Input type="text" placeholder="Buscar" />
-      </InputGroup>
+      <Box pos={["relative", "absolute"]} left={["0", "25"]}>
+        <Image src="/logo-original.svg" alt="logo" width={122} height={34} />
+      </Box>
+      <SearchBar />
     </Flex>
   );
 };
