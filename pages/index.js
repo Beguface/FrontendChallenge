@@ -1,6 +1,4 @@
-import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
-import { initializeApollo } from "../libs/apolloClient";
-import { Box, Flex } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import CarruselContainer from "@components/Containers/CarruselContainer";
 
 export default function Home() {

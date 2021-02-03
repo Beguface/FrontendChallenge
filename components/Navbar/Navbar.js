@@ -10,14 +10,14 @@ const Navbar = () => {
       align="center"
       flexWrap="wrap"
       width="100%"
-      px="4"
+      px={["4", "5%"]}
       py="3"
       borderBottom="1px #E2E8F0 solid"
       pos="fixed"
       top="0"
       bg="#ffffff"
     >
-      <Box pos={["relative", "absolute"]} left={["0", "25"]}>
+      <Box pos={["relative", "absolute"]} left={["0", "5%"]}>
         <Image src="/logo-original.svg" alt="logo" width={122} height={34} />
       </Box>
       <SearchBar />

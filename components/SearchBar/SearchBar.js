@@ -1,5 +1,4 @@
 import React from "react";
-
 import {
   Box,
   Button,
@@ -15,10 +14,30 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { SearchIcon, SettingsIcon } from "@chakra-ui/icons";
+import { useForm } from "@hooks/useForm";
+import Router from "next/router";
 
 const SearchBar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [{ term, location }, handleInputChange, formReset] = useForm({
+    term: "",
+    location: "",
+  });
   const buttonRef = React.useRef();
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    Router.push({
+      pathname: "/search",
+      query: {
+        term: term,
+        location: location,
+      },
+    });
+    formReset();
+    onClose();
+  };
+
   return (
     <>
       <InputGroup mt={["2"]} ml={["0", "6"]} maxW={["sm", "40%"]}>
@@ -46,33 +65,45 @@ const SearchBar = () => {
         <DrawerOverlay>
           <DrawerContent>
             <DrawerCloseButton />
+            <form onSubmit={handleOnSubmit}>
+              <DrawerBody mt="50px">
+                <InputGroup>
+                  <InputLeftElement
+                    pointerEvents="none"
+                    children={<SearchIcon color="gray.300" />}
+                  />
+                  <Input
+                    type="text"
+                    autoComplete="off"
+                    name="term"
+                    value={term}
+                    onChange={handleInputChange}
+                    placeholder="Pizza, hamburguesas, hot dog..."
+                  />
+                </InputGroup>
+                <InputGroup mt="4">
+                  <InputLeftElement
+                    pointerEvents="none"
+                    children={<SettingsIcon color="gray.300" />}
+                  />
+                  <Input
+                    type="text"
+                    autoComplete="off"
+                    name="location"
+                    value={location}
+                    onChange={handleInputChange}
+                    placeholder="Algun lugar..."
+                  />
+                </InputGroup>
+              </DrawerBody>
 
-            <DrawerBody mt="50px">
-              <InputGroup>
-                <InputLeftElement
-                  pointerEvents="none"
-                  children={<SearchIcon color="gray.300" />}
-                />
-                <Input
-                  type="text"
-                  placeholder="Pizza, hamburguesas, hot dog..."
-                />
-              </InputGroup>
-              <InputGroup mt="4">
-                <InputLeftElement
-                  pointerEvents="none"
-                  children={<SettingsIcon color="gray.300" />}
-                />
-                <Input type="text" placeholder="Algun lugar..." />
-              </InputGroup>
-            </DrawerBody>
-
-            <DrawerFooter>
-              <Button variant="outline" mr={3} onClick={onClose}>
-                Volver
-              </Button>
-              <Button>Buscar</Button>
-            </DrawerFooter>
+              <DrawerFooter>
+                <Button variant="outline" mr={3} onClick={onClose}>
+                  Volver
+                </Button>
+                <Button type="submit">Buscar</Button>
+              </DrawerFooter>
+            </form>
           </DrawerContent>
         </DrawerOverlay>
       </Drawer>
