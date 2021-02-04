@@ -22,6 +22,7 @@ const BusinessesContainer = ({ businesses }) => {
           }) => (
             <BusinessCard
               key={id}
+              id={id}
               imageUrl={photos}
               imageAlt={name}
               title={name}

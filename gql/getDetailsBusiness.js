@@ -15,11 +15,16 @@ export const GET_DETAILS_BUSINESS = gql`
       phone
       price
       hours {
+        open {
+          end
+          start
+        }
         is_open_now
       }
       reviews(limit: 5) {
         id
         text
+        rating
         user {
           image_url
           name

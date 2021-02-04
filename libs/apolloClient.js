@@ -12,13 +12,17 @@ const authLink = setContext(async (_, { headers }) => {
     headers: {
       ...headers,
       authorization: `Bearer ${process.env.API_KEY}`,
+      "Access-Control-Allow-Origin": "*",
     },
   };
 });
 
 const httpLink = new HttpLink({
-  uri: `${process.env.GRAPHQL_ENDPOINT}/graphql`,
+  uri: `${process.env.GRAPHQL_ENDPOINT}`,
   credentials: "include",
+  fetchOptions: {
+    mode: "no-cors",
+  },
 });
 
 function createApolloClient() {

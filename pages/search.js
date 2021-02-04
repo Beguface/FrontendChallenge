@@ -1,5 +1,5 @@
-import { initializeApollo } from "../libs/apolloClient";
 import { GET_BUSINESSES } from "@gql/getBusinesses";
+import { initializeApollo } from "../libs/apolloClient";
 import BusinessesContainer from "@components/Containers/BusinessesContainer";
 import { Box, Text } from "@chakra-ui/react";
 
@@ -28,7 +28,7 @@ export async function getServerSideProps(ctx) {
   const apolloClient = initializeApollo();
   let businesses = [];
 
-  if (ctx.query) {
+  if (ctx.query.location && ctx.query.term) {
     const { term, location } = ctx.query;
     const { data } = await apolloClient.query({
       query: GET_BUSINESSES,
@@ -39,7 +39,6 @@ export async function getServerSideProps(ctx) {
   } else {
     ctx.res.writeHead(302, { Location: "/" });
     ctx.res.end();
-    return;
   }
 
   return {
