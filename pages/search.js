@@ -48,6 +48,7 @@ export async function getServerSideProps(ctx) {
         },
       };
     } catch (e) {
+      console.log(e);
       ctx.statusCode = 503;
       return { props: { businesses, statusCode: 503 } };
     }
