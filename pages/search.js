@@ -2,9 +2,13 @@ import { GET_BUSINESSES } from "@gql/getBusinesses";
 import { initializeApollo } from "../libs/apolloClient";
 import BusinessesContainer from "@components/Containers/BusinessesContainer";
 import { Box, Text } from "@chakra-ui/react";
+import Error from "next/error";
 
-const Search = ({ businesses }) => {
-  console.log(businesses);
+const Search = ({ businesses, statusCode }) => {
+  if (statusCode !== 200) {
+    return <Error statusCode={statusCode} />;
+  }
+
   return (
     <>
       <Box as="h1" mb="4">
@@ -29,21 +33,30 @@ export async function getServerSideProps(ctx) {
   let businesses = [];
 
   if (ctx.query.location && ctx.query.term) {
-    const { term, location } = ctx.query;
-    const { data } = await apolloClient.query({
-      query: GET_BUSINESSES,
-      variables: { term, location },
-    });
-    businesses = data.search.business;
-    console.log(data);
-  } else {
-    ctx.res.writeHead(302, { Location: "/" });
-    ctx.res.end();
-  }
+    try {
+      const { term, location } = ctx.query;
+      const { data } = await apolloClient.query({
+        query: GET_BUSINESSES,
+        variables: { term, location },
+      });
+      businesses = data.search.business;
 
-  return {
-    props: {
-      businesses,
-    },
-  };
+      return {
+        props: {
+          businesses,
+          statusCode: 200,
+        },
+      };
+    } catch (e) {
+      ctx.statusCode = 503;
+      return { props: { businesses, statusCode: 503 } };
+    }
+  } else {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
 }

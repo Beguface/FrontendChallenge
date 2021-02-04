@@ -1,12 +1,17 @@
-import { PhoneIcon, StarIcon } from "@chakra-ui/icons";
-import { Box, Divider, Flex, Image, Tag, Text } from "@chakra-ui/react";
+import { initializeApollo } from "libs/apolloClient";
+import { GET_DETAILS_BUSINESS } from "@gql/getDetailsBusiness";
 import ReviewsContainer from "@components/Containers/ReviewsContainer";
 import DetailBusiness from "@components/DetailBusiness/DetailBusiness";
-import { GET_DETAILS_BUSINESS } from "@gql/getDetailsBusiness";
-import { initializeApollo } from "libs/apolloClient";
+import { Divider } from "@chakra-ui/react";
+import Error from "next/error";
 
-const Business = ({ detailBusiness }) => {
+const Business = ({ detailBusiness, statusCode }) => {
   const { reviews } = detailBusiness;
+
+  if (statusCode !== 200) {
+    return <Error statusCode={statusCode} />;
+  }
+
   return (
     <>
       <DetailBusiness detail={detailBusiness} />
@@ -21,19 +26,34 @@ export default Business;
 export async function getServerSideProps(ctx) {
   const apolloClient = initializeApollo();
   let detailBusiness = [];
-
   if (ctx.query.id) {
-    const { id } = ctx.query;
-    const {
-      data: { business },
-    } = await apolloClient.query({
-      query: GET_DETAILS_BUSINESS,
-      variables: { id },
-    });
-    detailBusiness = business;
+    try {
+      const { id } = ctx.query;
+      const {
+        data: { business },
+      } = await apolloClient.query({
+        query: GET_DETAILS_BUSINESS,
+        variables: { id },
+      });
+      detailBusiness = business;
+
+      return {
+        props: {
+          detailBusiness,
+          statusCode: 200,
+        },
+      };
+    } catch (e) {
+      ctx.statusCode = 503;
+      return { props: { detailBusiness, statusCode: 503 } };
+    }
   } else {
-    ctx.res.writeHead(302, { Location: "/" });
-    ctx.res.end();
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
   }
 
   return {
