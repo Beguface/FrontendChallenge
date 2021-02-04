@@ -1,9 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Link from "next/link";
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import { PhoneIcon, StarIcon } from "@chakra-ui/icons";
 
 const BusinessCard = ({
+  id,
   imageUrl,
   imageAlt,
   title,
@@ -13,46 +15,48 @@ const BusinessCard = ({
   rating,
 }) => {
   return (
-    <Box
-      maxW={["sm", "lg", "sm", "xs"]}
-      borderWidth="1px"
-      borderRadius="lg"
-      overflow="hidden"
-    >
-      <Box height="180px">
-        <Image
-          objectFit="cover"
-          boxSize="100%"
-          src={imageUrl[0]}
-          alt={imageAlt}
-          fallbackSrc="https://via.placeholder.com/180"
-        />
-      </Box>
+    <Link href={`/business/${id}`} passHref>
+      <Box
+        maxW={["sm", "lg", "sm", "xs"]}
+        borderWidth="1px"
+        borderRadius="lg"
+        overflow="hidden"
+      >
+        <Box height="180px">
+          <Image
+            objectFit="cover"
+            boxSize="100%"
+            src={imageUrl[0]}
+            alt={imageAlt}
+            fallbackSrc="https://via.placeholder.com/180"
+          />
+        </Box>
 
-      <Box p="6">
-        <Box fontWeight="semibold" as="h4" fontSize="md" isTruncated>
-          {title}
+        <Box p="6">
+          <Box fontWeight="semibold" as="h4" fontSize="md" isTruncated>
+            {title}
+          </Box>
+          <Flex alignItems="center" height="25px">
+            <StarIcon w={4} h={4} color="#FF9839" />
+            <Box as="span" ml="1" fontWeight="semibold">
+              {rating}
+            </Box>
+            <Box as="span" ml="1">
+              {`(${reviewCount})`}
+            </Box>
+          </Flex>
+          <Box mt="5">
+            <Box as="span">{address}</Box>
+          </Box>
+          <Flex mt="4" align="center">
+            <PhoneIcon w={4} h={4} />
+            <Box ml="1" as="span" fontWeight="regular">
+              {phone}
+            </Box>
+          </Flex>
         </Box>
-        <Flex alignItems="center" height="25px">
-          <StarIcon w={4} h={4} color="#FF9839" />
-          <Box as="span" ml="1" fontWeight="semibold">
-            {rating}
-          </Box>
-          <Box as="span" ml="1">
-            {`(${reviewCount})`}
-          </Box>
-        </Flex>
-        <Box mt="5">
-          <Box as="span">{address}</Box>
-        </Box>
-        <Flex mt="4" align="center">
-          <PhoneIcon w={4} h={4} />
-          <Box ml="1" as="span" fontWeight="regular">
-            {phone}
-          </Box>
-        </Flex>
       </Box>
-    </Box>
+    </Link>
   );
 };
 
