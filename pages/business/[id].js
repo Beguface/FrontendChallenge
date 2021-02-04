@@ -1,17 +1,40 @@
-import { PhoneIcon, StarIcon } from "@chakra-ui/icons";
-import { Box, Divider, Flex, Image, Tag, Text } from "@chakra-ui/react";
+import { initializeApollo } from "libs/apolloClient";
+import { GET_DETAILS_BUSINESS } from "@gql/getDetailsBusiness";
 import ReviewsContainer from "@components/Containers/ReviewsContainer";
 import DetailBusiness from "@components/DetailBusiness/DetailBusiness";
-import { GET_DETAILS_BUSINESS } from "@gql/getDetailsBusiness";
-import { initializeApollo } from "libs/apolloClient";
+import { Box, Divider, Image, Grid } from "@chakra-ui/react";
+import Error from "next/error";
+import BackButton from "@components/BackButton/BackButton";
 
-const Business = ({ detailBusiness }) => {
-  const { reviews } = detailBusiness;
+const Business = ({ detailBusiness, statusCode }) => {
+  const { reviews, photos } = detailBusiness;
+
+  if (statusCode !== 200) {
+    return <Error statusCode={statusCode} />;
+  }
+
   return (
     <>
-      <DetailBusiness detail={detailBusiness} />
-      <Divider mb="5" />
-      <ReviewsContainer reviews={reviews} />
+      <BackButton />
+      <Box height="300px">
+        <Image
+          src={photos[0]}
+          objectFit="cover"
+          boxSize="100%"
+          borderRadius={5}
+        />
+      </Box>
+      <Grid
+        templateColumns={[
+          "repeat(1, 1fr)",
+          "repeat(1, 1fr)",
+          "repeat(2, minmax(100px, 700px))",
+        ]}
+        gap="5"
+      >
+        <DetailBusiness detail={detailBusiness} />
+        <ReviewsContainer reviews={reviews} />
+      </Grid>
     </>
   );
 };
@@ -21,24 +44,33 @@ export default Business;
 export async function getServerSideProps(ctx) {
   const apolloClient = initializeApollo();
   let detailBusiness = [];
-
   if (ctx.query.id) {
-    const { id } = ctx.query;
-    const {
-      data: { business },
-    } = await apolloClient.query({
-      query: GET_DETAILS_BUSINESS,
-      variables: { id },
-    });
-    detailBusiness = business;
-  } else {
-    ctx.res.writeHead(302, { Location: "/" });
-    ctx.res.end();
-  }
+    try {
+      const { id } = ctx.query;
+      const {
+        data: { business },
+      } = await apolloClient.query({
+        query: GET_DETAILS_BUSINESS,
+        variables: { id },
+      });
+      detailBusiness = business;
 
-  return {
-    props: {
-      detailBusiness,
-    },
-  };
+      return {
+        props: {
+          detailBusiness,
+          statusCode: 200,
+        },
+      };
+    } catch (e) {
+      ctx.statusCode = 503;
+      return { props: { detailBusiness, statusCode: 503 } };
+    }
+  } else {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
 }

@@ -31,7 +31,7 @@ const CardContainer = ({ title }) => {
 
           {
             breakpoint: 767,
-            cols: 1,
+            cols: 2,
           },
         ]}
         loop

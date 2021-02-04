@@ -26,7 +26,7 @@ const ReviewItem = ({ comment, user, rating }) => {
 
 ReviewItem.propTypes = {
   comment: PropTypes.string.isRequired,
-  rating: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
   user: PropTypes.object.isRequired,
 };
 

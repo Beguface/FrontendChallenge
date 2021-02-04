@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Link from "next/link";
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, Image, Skeleton, Text } from "@chakra-ui/react";
 import { PhoneIcon, StarIcon } from "@chakra-ui/icons";
 
 const BusinessCard = ({
@@ -17,10 +17,12 @@ const BusinessCard = ({
   return (
     <Link href={`/business/${id}`} passHref>
       <Box
-        maxW={["sm", "lg", "sm", "xs"]}
+        maxW={["sm", "xs", "sm", "xs"]}
         borderWidth="1px"
         borderRadius="lg"
         overflow="hidden"
+        _hover={{ boxShadow: "0 0 11px rgba(33,33,33,.2)" }}
+        transition="box-shadow .3s"
       >
         <Box height="180px">
           <Image
@@ -28,7 +30,8 @@ const BusinessCard = ({
             boxSize="100%"
             src={imageUrl[0]}
             alt={imageAlt}
-            fallbackSrc="https://via.placeholder.com/180"
+            fallback={<Skeleton h="180px" />}
+            fallbackSrc="/images/180.png"
           />
         </Box>
 

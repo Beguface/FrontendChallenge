@@ -5,7 +5,6 @@ import { PhoneIcon, StarIcon, TimeIcon } from "@chakra-ui/icons";
 
 const DetailBusiness = ({ detail }) => {
   const {
-    photos,
     name,
     display_phone,
     price,
@@ -16,14 +15,6 @@ const DetailBusiness = ({ detail }) => {
   } = detail;
   return (
     <>
-      <Box height="300px">
-        <Image
-          src={photos[0]}
-          objectFit="cover"
-          boxSize="100%"
-          borderRadius={5}
-        />
-      </Box>
       <Box py="4">
         <Flex justify="space-between" align="baseline">
           <Box>
@@ -42,15 +33,16 @@ const DetailBusiness = ({ detail }) => {
           </Box>
 
           <Box>
-            {hours[0].is_open_now ? (
-              <Tag colorScheme="green" variant="outline" size="lg">
-                Abierto
-              </Tag>
-            ) : (
-              <Tag colorScheme="red" variant="outline" size="lg">
-                Cerrado
-              </Tag>
-            )}
+            {hours.length > 0 &&
+              (hours[0].is_open_now ? (
+                <Tag colorScheme="green" variant="outline" size="lg">
+                  Abierto
+                </Tag>
+              ) : (
+                <Tag colorScheme="red" variant="outline" size="lg">
+                  Cerrado
+                </Tag>
+              ))}
           </Box>
         </Flex>
 
@@ -68,10 +60,13 @@ const DetailBusiness = ({ detail }) => {
         <Flex mt="4" align="center">
           <TimeIcon boxSize="4" />
           <Box ml="2" as="span" fontWeight="regular">
-            {`${hours[0].open[0].start} - ${hours[0].open[0].end} h`}
+            {hours.length > 0
+              ? `${hours[0].open[0].start} - ${hours[0].open[0].end} h`
+              : "No disponible"}
           </Box>
         </Flex>
         <Box mt="4">{price}</Box>
+        <Divider mt="5" />
       </Box>
     </>
   );
