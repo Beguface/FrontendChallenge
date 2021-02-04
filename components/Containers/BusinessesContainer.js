@@ -6,7 +6,7 @@ const BusinessesContainer = ({ businesses }) => {
   return (
     <>
       <SimpleGrid
-        columns={[1, 2, 3, 4, 5]}
+        columns={[1, 2, 3, 4, 4, 5]}
         justifyItems={{ base: "center", sm: "initial" }}
         gap={6}
       >

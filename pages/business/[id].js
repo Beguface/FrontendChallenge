@@ -2,11 +2,12 @@ import { initializeApollo } from "libs/apolloClient";
 import { GET_DETAILS_BUSINESS } from "@gql/getDetailsBusiness";
 import ReviewsContainer from "@components/Containers/ReviewsContainer";
 import DetailBusiness from "@components/DetailBusiness/DetailBusiness";
-import { Divider } from "@chakra-ui/react";
+import { Box, Divider, Image, Grid } from "@chakra-ui/react";
 import Error from "next/error";
+import BackButton from "@components/BackButton/BackButton";
 
 const Business = ({ detailBusiness, statusCode }) => {
-  const { reviews } = detailBusiness;
+  const { reviews, photos } = detailBusiness;
 
   if (statusCode !== 200) {
     return <Error statusCode={statusCode} />;
@@ -14,9 +15,26 @@ const Business = ({ detailBusiness, statusCode }) => {
 
   return (
     <>
-      <DetailBusiness detail={detailBusiness} />
-      <Divider mb="5" />
-      <ReviewsContainer reviews={reviews} />
+      <BackButton />
+      <Box height="300px">
+        <Image
+          src={photos[0]}
+          objectFit="cover"
+          boxSize="100%"
+          borderRadius={5}
+        />
+      </Box>
+      <Grid
+        templateColumns={[
+          "repeat(1, 1fr)",
+          "repeat(1, 1fr)",
+          "repeat(2, minmax(100px, 700px))",
+        ]}
+        gap="5"
+      >
+        <DetailBusiness detail={detailBusiness} />
+        <ReviewsContainer reviews={reviews} />
+      </Grid>
     </>
   );
 };
@@ -55,10 +73,4 @@ export async function getServerSideProps(ctx) {
       },
     };
   }
-
-  return {
-    props: {
-      detailBusiness,
-    },
-  };
 }

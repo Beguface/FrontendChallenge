@@ -8,7 +8,7 @@ const AppLayout = ({ children }) => {
     <>
       <Navbar />
 
-      <Box padding="5%" mt={["104px", "64px"]}>
+      <Box padding={["5%", "2% 5%"]} mt={["104px", "64px"]}>
         {children}
       </Box>
 

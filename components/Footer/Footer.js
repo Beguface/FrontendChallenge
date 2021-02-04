@@ -9,8 +9,8 @@ const Footer = () => {
       borderTop="1px #E2E8F0 solid"
     >
       <footer>
-        <Box as="span" fontWeight="semibold">
-          Made with 💙 @beguface
+        <Box as="span">
+          Made with 💙<strong>@beguface</strong>
         </Box>
       </footer>
     </Flex>
