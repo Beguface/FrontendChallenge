@@ -21,7 +21,12 @@ npm i
 
 ```
 
-_Luego se debe generar el archivo env.local usando como base el archivo .env.example, añadiendo el respectivo endpoint y key para hacer uso de la API proporcionada_
+_Luego se debe generar el archivo env.local usando como base el archivo .env.example, añadiendo el respectivo endpoint y key para hacer uso de la API proporcionada. Seguido, se debe correr el servidor de desarrollo_
+
+```
+npm run dev
+
+```
 
 ## Construido con 🛠️
 
