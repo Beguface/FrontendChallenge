@@ -31,7 +31,7 @@ const BusinessCard = ({
             boxSize="100%"
             src={imageUrl[0]}
             alt={imageAlt}
-            fallback={<Skeleton h="180px" />}
+            fallback={<Skeleton h="180px" w="100%" />}
             fallbackSrc="/images/180.png"
           />
         </Box>
