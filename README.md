@@ -1,34 +1,47 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# GuruHotel - Frontend Challenge
 
-## Getting Started
+_Aplicación web que permite al usuario hacer una búsqueda en Yelp a partir de un término en especifico en determinada ubicación, para mostrar asi, los negocios/comercios relacionados a la búsqueda_
 
-First, run the development server:
+## Demo 👾
 
-```bash
-npm run dev
-# or
-yarn dev
+_En el siguiente enlace podra encontrar el demo desplegado directamente en Vercel: https://frontend-challenge-beta.vercel.app/._
+
+## Comenzando 🚀
+
+_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
+
+Mira **Deployment** para conocer como desplegar el proyecto.
+
+### Instalación 🔧
+
+_Se debe ejecutar el siguiente comando (en la carpeta raiz del proyecto) para instalar las dependencias necesarias para el buen funcionamiento de la aplicación_
+
+```
+npm i
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+_Luego se debe generar el archivo env.local usando como base el archivo .env.example, añadiendo el respectivo endpoint y key para hacer uso de la API proporcionada_
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Construido con 🛠️
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+_Menciona las herramientas que utilizaste para crear tu proyecto_
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- [Next.js](https://nextjs.org/docs/getting-started) - El framework web usado
+- [npm](https://docs.npmjs.com/) - Manejador de dependencias
+- [Apollo GraphQL](https://www.apollographql.com/docs/) - Cliente Apollo GraphQL
+- [Chakra UI](https://chakra-ui.com/docs/getting-started) - Libreria UI
+- [Formik](https://formik.org/docs/overview) - Libreria de formulario para React
+- [Yelp GraphQL API](https://www.yelp.com/developers) - API
 
-## Learn More
+## Autor ✒️
 
-To learn more about Next.js, take a look at the following resources:
+- **Cesar F Becerra** - _Trabajo Inicial y documentación_ - [beguface](https://github.com/beguface)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Licencia 📄
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Este proyecto está bajo la Licencia (Tu Licencia) - mira el archivo [LICENSE.md](LICENSE.md) para detalles
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+⌨️ con ❤️ por [beguface](https://github.com/beguface)
