@@ -3,6 +3,7 @@ import { initializeApollo } from "../libs/apolloClient";
 import BusinessesContainer from "@components/Containers/BusinessesContainer";
 import { Box, Text } from "@chakra-ui/react";
 import Error from "next/error";
+import { initializeStore } from "libs/redux";
 
 const Search = ({ businesses, statusCode }) => {
   if (statusCode !== 200) {
@@ -30,7 +31,9 @@ export default Search;
 
 export async function getServerSideProps(ctx) {
   const apolloClient = initializeApollo();
+  const reduxStore = initializeStore();
   let businesses = [];
+  const { dispatch } = reduxStore;
 
   if (ctx.query.location && ctx.query.term) {
     try {
@@ -41,8 +44,14 @@ export async function getServerSideProps(ctx) {
       });
       businesses = data.search.business;
 
+      dispatch({
+        type: "UPDATE",
+        payload: data.search.business,
+      });
+
       return {
         props: {
+          initialReduxState: reduxStore.getState(),
           businesses,
           statusCode: 200,
         },
