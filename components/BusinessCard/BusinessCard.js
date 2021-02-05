@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Link from "next/link";
-import { Box, Flex, Image, Skeleton, Text } from "@chakra-ui/react";
+import { Box, Flex, Image, Skeleton } from "@chakra-ui/react";
 import { PhoneIcon, StarIcon } from "@chakra-ui/icons";
 
 const BusinessCard = ({
@@ -21,6 +21,7 @@ const BusinessCard = ({
         borderWidth="1px"
         borderRadius="lg"
         overflow="hidden"
+        cursor="pointer"
         _hover={{ boxShadow: "0 0 11px rgba(33,33,33,.2)" }}
         transition="box-shadow .3s"
       >
@@ -48,13 +49,13 @@ const BusinessCard = ({
               {`(${reviewCount})`}
             </Box>
           </Flex>
-          <Box mt="5">
+          <Box mt="5" h="42px">
             <Box as="span">{address}</Box>
           </Box>
           <Flex mt="4" align="center">
             <PhoneIcon w={4} h={4} />
             <Box ml="1" as="span" fontWeight="regular">
-              {phone}
+              {phone || "No disponible"}
             </Box>
           </Flex>
         </Box>
@@ -71,18 +72,6 @@ BusinessCard.propTypes = {
   phone: PropTypes.string,
   reviewCount: PropTypes.number.isRequired,
   rating: PropTypes.number.isRequired,
-};
-
-BusinessCard.defaultProps = {
-  imageUrl: [
-    "https://s3-media1.fl.yelpcdn.com/bphoto/GxwC-weYAaG9zKnhWgglSw/o.jpg",
-  ],
-  imageAlt: "Rear view of modern home with pool",
-  title: "Modern home in city center in the heart of historic Los Angeles",
-  address: "3410 Judah St\nSan Francisco, CA 94122",
-  phone: "(415) 982-9738",
-  reviewCount: 34,
-  rating: 5,
 };
 
 export default BusinessCard;

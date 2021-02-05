@@ -2,7 +2,7 @@ import { initializeApollo } from "libs/apolloClient";
 import { GET_DETAILS_BUSINESS } from "@gql/getDetailsBusiness";
 import ReviewsContainer from "@components/Containers/ReviewsContainer";
 import DetailBusiness from "@components/DetailBusiness/DetailBusiness";
-import { Box, Divider, Image, Grid } from "@chakra-ui/react";
+import { Box, Image, Grid, Skeleton } from "@chakra-ui/react";
 import Error from "next/error";
 import BackButton from "@components/BackButton/BackButton";
 
@@ -21,6 +21,7 @@ const Business = ({ detailBusiness, statusCode }) => {
           src={photos[0]}
           objectFit="cover"
           boxSize="100%"
+          fallback={<Skeleton h="180px" />}
           borderRadius={5}
         />
       </Box>
