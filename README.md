@@ -30,8 +30,6 @@ npm run dev
 
 ## Construido con 🛠️
 
-_Menciona las herramientas que utilizaste para crear tu proyecto_
-
 - [Next.js](https://nextjs.org/docs/getting-started) - El framework web usado
 - [npm](https://docs.npmjs.com/) - Manejador de dependencias
 - [Apollo GraphQL](https://www.apollographql.com/docs/) - Cliente Apollo GraphQL
@@ -44,8 +42,6 @@ _Menciona las herramientas que utilizaste para crear tu proyecto_
 - **Cesar F Becerra** - _Trabajo Inicial y documentación_ - [beguface](https://github.com/beguface)
 
 ## Licencia 📄
-
-Este proyecto está bajo la Licencia (Tu Licencia) - mira el archivo [LICENSE.md](LICENSE.md) para detalles
 
 ---
 
