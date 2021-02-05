@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Box, Divider, Flex, Image, Tag } from "@chakra-ui/react";
+import { Box, Divider, Flex, Tag } from "@chakra-ui/react";
 import { PhoneIcon, StarIcon, TimeIcon } from "@chakra-ui/icons";
 
 const DetailBusiness = ({ detail }) => {
@@ -54,7 +54,7 @@ const DetailBusiness = ({ detail }) => {
         <Flex mt="4" align="center">
           <PhoneIcon boxSize="4" />
           <Box ml="2" as="span" fontWeight="regular">
-            {display_phone}
+            {display_phone || "No disponible"}
           </Box>
         </Flex>
         <Flex mt="4" align="center">
@@ -65,7 +65,13 @@ const DetailBusiness = ({ detail }) => {
               : "No disponible"}
           </Box>
         </Flex>
-        <Box mt="4">{price}</Box>
+        <Box mt="4">
+          <Box as="span" fontWeight="regular">
+            Precios:
+            {price ? price : " No disponible"}
+          </Box>
+        </Box>
+
         <Divider mt="5" />
       </Box>
     </>
